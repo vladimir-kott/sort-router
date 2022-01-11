@@ -6,8 +6,12 @@ import GroupList from "./groupList"
 import UserTable from "./usersTable";
 import api from "../api"
 import _ from 'lodash'
+import { useParams } from "react-router-dom"
+import User from './user'
 
 const Users = () => {
+    const params = useParams()
+
     const pageSize = 8
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -71,8 +75,11 @@ const Users = () => {
     /*console.log(filteredUsers)*/
     const userCrop = paginate(sortedUsers, currentPage, pageSize)
 
+    const {userId} = params
+    /*console.log('userId', userId)*/
+
     return (
-        <div className="d-flex">
+        userId?<User id = {userId}></User>:<div className="d-flex">
         {professions && (<div className="d-flex flex-column flex-shrink-0 p-3">
                         <GroupList 
                             selectedItem = {selectedProf}
@@ -98,7 +105,7 @@ const Users = () => {
             </div>
             </div>
         </div>
-    );}
+    )}
     return 'loading...'
 };
 
